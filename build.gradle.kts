@@ -16,12 +16,14 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    runtimeOnly("org.postgresql:postgresql")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.0.4")
+    implementation("org.springframework.boot:spring-boot-starter-security:3.0.4")
+    implementation("org.springframework.boot:spring-boot-starter-web:3.1.0")
+    implementation("com.miglayout:miglayout-swing:11.1")
+    implementation("com.formdev:flatlaf:3.0")
+    runtimeOnly("org.postgresql:postgresql:42.5.4")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:3.1.0")
+    testImplementation("org.springframework.security:spring-security-test:6.0.2")
 }
 
 tasks.withType<Test> {

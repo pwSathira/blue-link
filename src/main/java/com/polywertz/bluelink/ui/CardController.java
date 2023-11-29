@@ -1,4 +1,4 @@
-package com.polywertz.bluelink.UI;
+package com.polywertz.bluelink.ui;
 
 import javax.swing.*;
 
@@ -11,9 +11,7 @@ public class CardController {
     public CardController(JFrame frame) {
         cl = new CardLayout();
         cards = new JPanel(cl);
-
         cards.setPreferredSize(frame.getContentPane().getSize());
-
         // Add the cards panel to the frame
         frame.getContentPane().add(cards);
     }
@@ -27,4 +25,5 @@ public class CardController {
     public void showCard(String name) {
         cl.show(cards, name);
     }
+
 }
