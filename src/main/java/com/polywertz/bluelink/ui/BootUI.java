@@ -14,7 +14,7 @@ public class BootUI extends JPanel {
 
     public BootUI() {
         //Background
-        setBackground(new Color(55, 136, 155));
+        setBackground(new Color(0x379B8C));
 
         //BootLabel
         bootLabel = new JLabel("Blue-Link Police MDT");
@@ -43,10 +43,10 @@ public class BootUI extends JPanel {
         RotatingCircleTimer();
 
         // Progress Label Counting to 100
-        ProgLabel(progLabel);
+        ProgLabel(progLabel, 0);
     }
-    private void ProgLabel(JLabel progLabel) {
-        Timer timer = new Timer(50, new ActionListener() {
+    private void ProgLabel(JLabel progLabel, int delay) {
+        Timer timer = new Timer(delay, new ActionListener() {
             private int i = 0;
 
             @Override
