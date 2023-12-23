@@ -1,6 +1,7 @@
 package com.polywertz.bluelink.ui;
+import com.polywertz.bluelink.controller.UserService;
+import com.polywertz.bluelink.db.User;
 import com.polywertz.bluelink.logic.BackgroundPanel;
-import com.polywertz.bluelink.logic.RoundedJTextField;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,22 +10,27 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class LoginUI extends JPanel {
-    public LoginUI() {
+    private final JTextField usernameField;
+    private final JPasswordField passwordField;
+    private UserService userService;
+
+    public LoginUI(UserService userService) {
+        this.userService = userService;
         ImageIcon titleIcon = new ImageIcon("src/main/resources/static/loginui/BLink_LoginUI_Logo.png");
         titleIcon = resizeIcon(titleIcon, 300, 70);
         ImageIcon buttonIcon = new ImageIcon("src/main/resources/static/loginui/BLink_LoginUI_Arrow_Light.png");
         buttonIcon = resizeIcon(buttonIcon, 50, 50);
 
         // Use MigLayout as the main layout manager with two columns
-        setLayout(new MigLayout("insets 0, fill", "[30%]0[70%]", "[grow]"));
+        setLayout(new MigLayout("debug, insets 0, fill", "[30%]0[70%]", "[grow]"));
 
         // Initialize the left panel with MigLayout for the login form
         JPanel leftPanel = new JPanel(new MigLayout("wrap 2", "[][grow,fill]", "[]10[]10[]10[]"));
         leftPanel.setBackground(Color.WHITE);
         leftPanel.setBorder(new EmptyBorder(20,20,20,20));
         JLabel titleLabel = new JLabel(titleIcon);
-        JTextField usernameField = new JTextField(20);
-        JPasswordField passwordField = new JPasswordField(20);
+        usernameField = new JTextField(20);
+        passwordField = new JPasswordField(20);
         JCheckBox rememberMeCheckbox = new JCheckBox("Remember Me");
         JButton loginButton = new JButton(buttonIcon);
         buttonIconFunctions(loginButton);
@@ -71,6 +77,7 @@ public class LoginUI extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                createUser();
             }
         });
     }
@@ -78,6 +85,23 @@ public class LoginUI extends JPanel {
         Image img = icon.getImage();
         Image resizedImage = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
+    }
+
+    private void createUser() {
+        String username = usernameField.getText();
+        char[] password = passwordField.getPassword();
+
+        // Here, you would typically hash the password before storing it
+        // For the sake of this example, we'll just convert it to a String
+        String passwordString = new String(password);
+
+        // Assuming UserService has a method to create users
+        User newUser = userService.createUser(username, passwordString, 1);
+        if (newUser != null) {
+            JOptionPane.showMessageDialog(this, "User created successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to create user.");
+        }
     }
 }
 

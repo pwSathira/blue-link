@@ -2,9 +2,13 @@ package com.polywertz.bluelink.ui;
 
 import javax.swing.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.polywertz.bluelink.controller.UserService;
+
 public class ApplicationUI extends JFrame {
     public static CardController ccInstance;
-    public ApplicationUI() {
+    private final UserService userService;
+    public ApplicationUI(UserService userService) {
+        this.userService = userService;
         //Initializes FlatLaf Look and Feel
         initFlatLaf();
 
@@ -37,7 +41,7 @@ public class ApplicationUI extends JFrame {
 
         //Login Card
         final String loginString = "login";
-        LoginUI loginUI = new LoginUI();
+        LoginUI loginUI = new LoginUI(userService);
         ccInstance.addCard(loginUI, loginString);
     }
     private void setFavicon() {
