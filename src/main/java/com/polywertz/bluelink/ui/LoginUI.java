@@ -96,7 +96,7 @@ public class LoginUI extends JPanel {
         String passwordString = new String(password);
 
         // Assuming UserService has a method to create users
-        User newUser = userService.createUser(username, passwordString, 1);
+        User newUser = userService.createUser(username, passwordString);
         if (newUser != null) {
             JOptionPane.showMessageDialog(this, "User created successfully!");
         } else {
