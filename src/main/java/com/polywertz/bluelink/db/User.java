@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "bl_users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", initialValue = 1, allocationSize = 1)
     private Long id;
     private String name;
     private String password;
@@ -30,5 +31,9 @@ public class User {
 
     public void setPassword(String passwordString) {
         this.password = passwordString;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

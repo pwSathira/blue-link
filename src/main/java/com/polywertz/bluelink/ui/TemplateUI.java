@@ -4,15 +4,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TemplateUI extends JPanel {
+    protected JLabel label;
+    protected JButton button;
+
     public TemplateUI() {
-        // Set a layout for the panel
         setLayout(new BorderLayout());
+        initializeComponents();
+        addComponents();
+    }
 
-        // Create and add some components
-        JLabel label = new JLabel("This is a template JPanel.");
-        JButton button = new JButton("Click Me!");
+    protected void initializeComponents() {
+        // Initialize components with default values
+        label = new JLabel("This is a template JPanel.");
+        button = new JButton("Click Me!");
+    }
 
-        // Add the components to the panel
+    protected void addComponents() {
+        // Add components to the layout
         add(label, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }

@@ -16,4 +16,17 @@ public class UserService {
         newUser.setPassword(passwordString);
         return userRepository.save(newUser);
     }
+    public boolean checkUser(String name, String passwordString) {
+        User user = findUser(name);
+        if (user == null) {
+            return false;
+        }
+        else {
+            return user.getPassword().equals(passwordString);
+        }
+    }
+    public User findUser(String name) {
+        return userRepository.findByName(name);
+    }
+
 }

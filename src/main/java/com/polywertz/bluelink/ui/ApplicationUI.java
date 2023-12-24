@@ -43,6 +43,11 @@ public class ApplicationUI extends JFrame {
         final String loginString = "login";
         LoginUI loginUI = new LoginUI(userService);
         ccInstance.addCard(loginUI, loginString);
+
+        //Main Card
+        final String mainString = "main";
+        MainUI mainUI = new MainUI();
+        ccInstance.addCard(mainUI, mainString);
     }
     private void setFavicon() {
         ImageIcon favicon = new ImageIcon("src/main/resources/static/blue-link-favicon.png");

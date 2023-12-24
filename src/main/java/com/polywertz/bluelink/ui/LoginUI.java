@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static com.polywertz.bluelink.ui.ApplicationUI.ccInstance;
+
 public class LoginUI extends JPanel {
     private final JTextField usernameField;
     private final JPasswordField passwordField;
@@ -22,7 +24,7 @@ public class LoginUI extends JPanel {
         buttonIcon = resizeIcon(buttonIcon, 50, 50);
 
         // Use MigLayout as the main layout manager with two columns
-        setLayout(new MigLayout("debug, insets 0, fill", "[30%]0[70%]", "[grow]"));
+        setLayout(new MigLayout("insets 0, fill", "[30%]0[70%]", "[grow]"));
 
         // Initialize the left panel with MigLayout for the login form
         JPanel leftPanel = new JPanel(new MigLayout("wrap 2", "[][grow,fill]", "[]10[]10[]10[]"));
@@ -31,7 +33,7 @@ public class LoginUI extends JPanel {
         JLabel titleLabel = new JLabel(titleIcon);
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
-        JCheckBox rememberMeCheckbox = new JCheckBox("Remember Me");
+//        JCheckBox rememberMeCheckbox = new JCheckBox("Remember Me");
         JButton loginButton = new JButton(buttonIcon);
         buttonIconFunctions(loginButton);
         JLabel footerLabel = new JLabel("version 0.1 Alpha");
@@ -47,7 +49,7 @@ public class LoginUI extends JPanel {
         leftPanel.add(usernameField, "align center, wrap");
         leftPanel.add(passwordLabel);
         leftPanel.add(passwordField, "align center, wrap");
-        leftPanel.add(rememberMeCheckbox, "span, wrap");
+//        leftPanel.add(rememberMeCheckbox, "span, wrap");
         leftPanel.add(loginButton, "span, align center");
         leftPanel.add(footerLabel, "span, align center, wrap");
 
@@ -77,7 +79,13 @@ public class LoginUI extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                createUser();
+                if (userService.checkUser(usernameField.getText(), new String(passwordField.getPassword()))) {
+                    User user = userService.findUser(usernameField.getText());
+                    ccInstance.showCard("main");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username/Password invalid");
+                }
             }
         });
     }
@@ -87,21 +95,5 @@ public class LoginUI extends JPanel {
         return new ImageIcon(resizedImage);
     }
 
-    private void createUser() {
-        String username = usernameField.getText();
-        char[] password = passwordField.getPassword();
-
-        // Here, you would typically hash the password before storing it
-        // For the sake of this example, we'll just convert it to a String
-        String passwordString = new String(password);
-
-        // Assuming UserService has a method to create users
-        User newUser = userService.createUser(username, passwordString);
-        if (newUser != null) {
-            JOptionPane.showMessageDialog(this, "User created successfully!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Failed to create user.");
-        }
-    }
 }
 
