@@ -1,4 +1,4 @@
-package com.polywertz.bluelink.ui;
+package com.polywertz.bluelink.logic;
 
 import javax.swing.*;
 

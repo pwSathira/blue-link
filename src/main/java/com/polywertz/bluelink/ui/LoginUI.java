@@ -14,10 +14,12 @@ import static com.polywertz.bluelink.ui.ApplicationUI.ccInstance;
 public class LoginUI extends JPanel {
     private final JTextField usernameField;
     private final JPasswordField passwordField;
-    private UserService userService;
+    private final UserService userService;
+    private final LoginSuccessListener loginSuccessListener;
 
-    public LoginUI(UserService userService) {
+    public LoginUI(UserService userService, LoginSuccessListener loginSuccessListener) {
         this.userService = userService;
+        this.loginSuccessListener = loginSuccessListener;
         ImageIcon titleIcon = new ImageIcon("src/main/resources/static/loginui/BLink_LoginUI_Logo.png");
         titleIcon = resizeIcon(titleIcon, 300, 70);
         ImageIcon buttonIcon = new ImageIcon("src/main/resources/static/loginui/BLink_LoginUI_Arrow_Light.png");
@@ -36,6 +38,7 @@ public class LoginUI extends JPanel {
 //        JCheckBox rememberMeCheckbox = new JCheckBox("Remember Me");
         JButton loginButton = new JButton(buttonIcon);
         buttonIconFunctions(loginButton);
+        passwordFieldFunctions(passwordField);
         JLabel footerLabel = new JLabel("version 0.1 Alpha");
         footerLabel.setFont(new Font("Arial", Font.ITALIC, 12));
         JLabel usernameLabel = new JLabel("Username");
@@ -61,6 +64,28 @@ public class LoginUI extends JPanel {
         add(leftPanel, "grow");
         add(rightPanel, "grow");
     }
+
+    private void passwordFieldFunctions(JPasswordField passwordField) {
+        passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+                    determineLoginStatus();
+                }
+            }
+        });
+    }
+
+    private void determineLoginStatus() {
+        if (userService.checkUser(usernameField.getText(), new String(passwordField.getPassword()))) {
+            User user = userService.findUser(usernameField.getText());
+            userService.setCurrentUser(user);
+            loginSuccessListener.onLoginSuccess();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Username/Password invalid");
+        }
+    }
+
     private void buttonIconFunctions(JButton loginButton) {
         loginButton.setBorder(null);
         loginButton.setFocusPainted(false);
@@ -79,15 +104,10 @@ public class LoginUI extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (userService.checkUser(usernameField.getText(), new String(passwordField.getPassword()))) {
-                    User user = userService.findUser(usernameField.getText());
-                    ccInstance.showCard("main");
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Username/Password invalid");
-                }
+                determineLoginStatus();
             }
         });
+
     }
     private ImageIcon resizeIcon(ImageIcon icon, int width, int height) {
         Image img = icon.getImage();

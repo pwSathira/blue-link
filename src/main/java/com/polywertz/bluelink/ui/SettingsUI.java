@@ -2,10 +2,10 @@ package com.polywertz.bluelink.ui;
 
 import com.polywertz.bluelink.controller.UserService;
 
-public class MainUI extends TemplateUI {
-    public MainUI(UserService userService) {
+public class SettingsUI extends TemplateUI {
+    public SettingsUI(UserService userService) {
         super(userService); // Call the constructor of TemplateUI
-        System.out.println(userService.getCurrentUser().getName());
+        System.out.println("SettingsUI constructor");
     }
 
 }

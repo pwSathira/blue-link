@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    private User currentUser;
 
     public User createUser(String name, String passwordString) {
         User newUser = new User();
@@ -28,5 +29,10 @@ public class UserService {
     public User findUser(String name) {
         return userRepository.findByName(name);
     }
-
+    public void setCurrentUser(User user) {
+        currentUser = user;
+    }
+    public User getCurrentUser() {
+        return currentUser;
+    }
 }
