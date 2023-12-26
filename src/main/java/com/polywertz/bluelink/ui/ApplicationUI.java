@@ -8,15 +8,19 @@ import com.polywertz.bluelink.logic.CardController;
 public class ApplicationUI extends JFrame implements LoginSuccessListener{
     public static CardController ccInstance;
     private final UserService userService;
-    public ApplicationUI(UserService userService) {
+    public ApplicationUI(UserService userService, boolean loginUser) {
         this.userService = userService;
         //Initializes FlatLaf Look and Feel
         initFlatLaf();
 
         //Card Controller Initialization
         ccInstance = new CardController(this);
-        addInitialCards();
-        ccInstance.showCard("boot");
+        if (loginUser) {
+            addInitialCards();
+            ccInstance.showCard("boot");
+        } else {
+            skipLogin(this, userService);
+        }
 
         //Default Operations
         setFavicon();
@@ -82,5 +86,10 @@ public class ApplicationUI extends JFrame implements LoginSuccessListener{
     public void onLoginSuccess() {
         addUserDefinedCards();
         ccInstance.showCard("main");
+    }
+
+    private static void skipLogin(ApplicationUI appUI, UserService userService) {
+            userService.setCurrentUser(userService.findUser("admin"));
+            appUI.onLoginSuccess();
     }
 }
