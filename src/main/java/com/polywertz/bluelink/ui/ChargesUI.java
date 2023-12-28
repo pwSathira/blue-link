@@ -5,6 +5,5 @@ import com.polywertz.bluelink.controller.UserService;
 public class ChargesUI extends TemplateUI{
     public ChargesUI(UserService userService) {
         super(userService);
-        System.out.println("ChargesUI constructor");
     }
 }
