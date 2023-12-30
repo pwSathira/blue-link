@@ -2,24 +2,31 @@ package com.polywertz.bluelink.ui;
 import com.polywertz.bluelink.controller.UserService;
 import com.polywertz.bluelink.db.User;
 import com.polywertz.bluelink.logic.BackgroundPanel;
+import com.polywertz.bluelink.logic.CardController;
 import net.miginfocom.swing.MigLayout;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static com.polywertz.bluelink.ui.ApplicationUI.ccInstance;
-
+@Component
 public class LoginUI extends JPanel {
     private final JTextField usernameField;
     private final JPasswordField passwordField;
-    private final UserService userService;
-    private final LoginSuccessListener loginSuccessListener;
 
-    public LoginUI(UserService userService, LoginSuccessListener loginSuccessListener) {
-        this.userService = userService;
-        this.loginSuccessListener = loginSuccessListener;
+    @Autowired
+    private UserService userService;
+
+    private CardController ccInstance;
+
+    @Autowired
+    public LoginUI(CardController ccInstance) {
+        this.ccInstance = ccInstance;
         ImageIcon titleIcon = new ImageIcon("src/main/resources/static/loginui/BLink_LoginUI_Logo.png");
         titleIcon = resizeIcon(titleIcon, 300, 70);
         ImageIcon buttonIcon = new ImageIcon("src/main/resources/static/loginui/BLink_LoginUI_Arrow_Light.png");
@@ -79,7 +86,7 @@ public class LoginUI extends JPanel {
         if (userService.checkUser(usernameField.getText(), new String(passwordField.getPassword()))) {
             User user = userService.findUser(usernameField.getText());
             userService.setCurrentUser(user);
-            loginSuccessListener.onLoginSuccess();
+            ccInstance.addLoginCards();
 
         } else {
             JOptionPane.showMessageDialog(null, "Username/Password invalid");

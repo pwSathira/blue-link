@@ -5,14 +5,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Arc2D;
-import net.miginfocom.swing.MigLayout;
 
+import com.polywertz.bluelink.logic.CardController;
+import net.miginfocom.swing.MigLayout;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class BootUI extends JPanel {
     private JLabel bootLabel;
     private Timer timer;
     private int angle = 0;
 
-    public BootUI() {
+    private CardController ccInstance;
+
+    @Autowired
+    public BootUI(CardController ccInstance) {
+        this.ccInstance = ccInstance;
         //Background
         setBackground(new Color(0x379B8C));
 
@@ -52,7 +61,7 @@ public class BootUI extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (i == 100){
-                    Timer switchTimer = new Timer(1000, v -> ApplicationUI.ccInstance.showCard("login"));
+                    Timer switchTimer = new Timer(1000, v -> ccInstance.showCard("login"));
                     switchTimer.setRepeats(false); // Ensure the timer only fires once
                     switchTimer.start();
                 }

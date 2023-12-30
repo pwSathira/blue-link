@@ -1,15 +1,17 @@
 package com.polywertz.bluelink.ui;
 
 import com.polywertz.bluelink.controller.UserService;
+import com.polywertz.bluelink.logic.CardController;
 import net.miginfocom.swing.MigLayout;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static com.polywertz.bluelink.ui.ApplicationUI.ccInstance;
-
+@Service
 public class TemplateUI extends JPanel {
 
     // Variable Declarations
@@ -20,11 +22,16 @@ public class TemplateUI extends JPanel {
     protected JButton settingsButton;
     protected JPanel rightPanel;
     protected JPanel leftPanel;
+
+    @Autowired
     private UserService userService;
 
+    private CardController ccInstance;
+
     // Constructor
-    public TemplateUI(UserService userService) {
-        this.userService = userService;
+    @Autowired
+    public TemplateUI(CardController ccInstance) {
+        this.ccInstance = ccInstance;
         setupLayout();
         initializeComponents();
         addComponents(leftPanel);
