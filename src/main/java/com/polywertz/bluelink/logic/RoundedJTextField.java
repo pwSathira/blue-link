@@ -8,9 +8,8 @@ import java.awt.geom.RoundRectangle2D;
 
 public class RoundedJTextField extends JTextField {
     private Shape shape;
-    private String placeholderText = "Username";
 
-    public RoundedJTextField(int size) {
+    public RoundedJTextField(int size, String placeholderText) {
         super(size);
         setOpaque(false);
         setText(placeholderText);

@@ -70,6 +70,17 @@ public class LoginUI extends JPanel {
         // Add both panels to the main panel
         add(leftPanel, "grow");
         add(rightPanel, "grow");
+
+        Timer switchTimer = new Timer(1000, v -> skipLogin());
+        switchTimer.setRepeats(false); // Ensure the timer only fires once
+        switchTimer.start();
+    }
+
+    private void skipLogin() {
+        User user = userService.findUser("admin");
+        userService.setCurrentUser(user);
+        ccInstance.addLoginCards();
+        ccInstance.showCard("charges");
     }
 
     private void passwordFieldFunctions(JPasswordField passwordField) {

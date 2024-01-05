@@ -38,12 +38,14 @@ public class CardController {
         ProfilesUI profilesUI = context.getBean(ProfilesUI.class);
         ChargesUI chargesUI = context.getBean(ChargesUI.class);
         SettingsUI settingsUI = context.getBean(SettingsUI.class);
+        ReportUI reportUI = context.getBean(ReportUI.class);
 
         // Add them as cards
         addCard(mainUI, "main");
         addCard(profilesUI, "profiles");
         addCard(chargesUI, "charges");
         addCard(settingsUI, "settings");
+        addCard(reportUI, "report");
 
         // Show the main card
         showCard("main");

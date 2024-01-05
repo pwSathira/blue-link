@@ -2,6 +2,8 @@ package com.polywertz.bluelink.ui;
 
 import javax.swing.*;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.polywertz.bluelink.controller.UserService;
+import com.polywertz.bluelink.db.User;
 import com.polywertz.bluelink.logic.CardController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,7 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApplicationUI extends JFrame {
 
-    private CardController cardController;
+    @Autowired
+    private UserService userService;
 
     public ApplicationUI() {
         initFlatLaf();
@@ -20,10 +23,10 @@ public class ApplicationUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void postConstructInitialize(CardController cardController) {
+    public void postConstructInitialize(CardController ccInstance) {
         // Use CardController to set up UI components
-        cardController.addInitialCards();
-        cardController.showCard("boot");
+        ccInstance.addInitialCards();
+        ccInstance.showCard("boot");
         setVisible(true);
     }
 

@@ -61,9 +61,9 @@ public class BootUI extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (i == 100){
-                    Timer switchTimer = new Timer(1000, v -> ccInstance.showCard("login"));
-                    switchTimer.setRepeats(false); // Ensure the timer only fires once
-                    switchTimer.start();
+//                    Timer switchTimer = new Timer(1000, v -> ccInstance.showCard("login"));
+//                    switchTimer.setRepeats(false); // Ensure the timer only fires once
+//                    switchTimer.start();
                 }
                 if (i <= 100) {
                     progLabel.setText("Progress " + i + "%");

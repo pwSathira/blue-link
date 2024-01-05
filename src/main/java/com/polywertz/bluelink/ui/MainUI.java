@@ -4,7 +4,7 @@ import com.polywertz.bluelink.controller.UserService;
 import com.polywertz.bluelink.logic.CardController;
 import net.miginfocom.swing.MigLayout;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,15 +13,13 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 
-@Service
+@Component
 public class MainUI extends TemplateUI {
-
     @Autowired
     private static UserService userService;
-
     @Autowired
-    public MainUI(CardController cardController) {
-        super(cardController); // Call the constructor of TemplateUI
+    public MainUI(CardController ccInstance) {
+        super(ccInstance); // Call the constructor of TemplateUI
         JPanel mainPanel = this.rightPanel;
         mainPanel.setLayout(new MigLayout("wrap 3", "[grow]10[grow]10[grow]", "[]10[]10[]"));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));

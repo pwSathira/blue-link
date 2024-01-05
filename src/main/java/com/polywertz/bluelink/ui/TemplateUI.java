@@ -4,14 +4,14 @@ import com.polywertz.bluelink.controller.UserService;
 import com.polywertz.bluelink.logic.CardController;
 import net.miginfocom.swing.MigLayout;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-@Service
+@Component
 public class TemplateUI extends JPanel {
 
     // Variable Declarations
