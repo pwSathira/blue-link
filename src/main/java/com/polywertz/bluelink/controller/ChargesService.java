@@ -26,4 +26,11 @@ public class ChargesService {
         return chargesRepository.findByFelonyType(felonyType);
     }
 
+    public int getNumberCharges() {
+        int count = 0;
+        while (chargesRepository.findAll().iterator().hasNext()) {
+            count++;
+        }
+        return count;
+    }
 }
