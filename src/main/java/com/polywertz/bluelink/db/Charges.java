@@ -77,4 +77,8 @@ public class Charges {
     public void setFine(Integer fine) {
         this.fine = fine;
     }
+
+    public String getCharge() {
+        return " "+ this.name + " | " + this.description + " | " + this.timeInMonths + " Months | $" + this.fine;
+    }
 }

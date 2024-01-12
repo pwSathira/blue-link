@@ -10,4 +10,6 @@ public interface ChargesRepository extends CrudRepository<Charges, Long> {
     Iterable<Charges> findByFelonyType(String felonyType);
 
     Iterable<Charges> findAll();
+
+    Iterable<Charges> findByNameContainingIgnoreCase(String searchTerm);
 }

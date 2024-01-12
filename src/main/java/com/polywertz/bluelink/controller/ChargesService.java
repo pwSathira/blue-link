@@ -27,10 +27,17 @@ public class ChargesService {
     }
 
     public int getNumberCharges() {
-        int count = 0;
-        while (chargesRepository.findAll().iterator().hasNext()) {
-            count++;
-        }
-        return count;
+        // Use the built-in count method if available
+        return (int) chargesRepository.count();
     }
+
+    //Returns all the charges in the database
+    public Iterable<Charges> getAllCharges() {
+        return chargesRepository.findAll();
+    }
+
+    public Iterable<Charges> findChargesBySearchTerm(String searchTerm){
+        return chargesRepository.findByNameContainingIgnoreCase(searchTerm);
+    }
+
 }

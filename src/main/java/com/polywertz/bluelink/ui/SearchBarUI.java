@@ -9,8 +9,12 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class SearchBarUI extends JPanel {
-
-    public SearchBarUI() {
+    private final SearchCallback searchCallback;
+    public interface SearchCallback {
+        void onSearch(String searchTerm);
+    }
+    public SearchBarUI(SearchCallback searchCallback) {
+        this.searchCallback = searchCallback;
         RoundedPanel searchPanel = new RoundedPanel(20, new Color(0xC1C9D4));
         searchPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
         searchPanel.setPreferredSize(new Dimension(500, 50));
@@ -48,8 +52,9 @@ public class SearchBarUI extends JPanel {
         searchField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                    // Do something
-                    System.out.println("Enter pressed "+ searchField.getText());
+                    if (searchCallback != null) {
+                        searchCallback.onSearch(searchField.getText());
+                    }
                 }
             }
         });
