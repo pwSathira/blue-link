@@ -74,7 +74,17 @@ public class ConsoleColors {
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
 
+    public static void bluelink() {
+        System.out.print(BLUE_BOLD_BRIGHT + "Blue-Link:" + RESET + " ");
+    }
+
     public static void error(String message) {
+        bluelink();
         System.out.println(RED_BOLD_BRIGHT + message + RESET);
+    }
+
+    public static void info(String reportUIInitialized) {
+        bluelink();
+        System.out.println(YELLOW + reportUIInitialized + RESET);
     }
 }

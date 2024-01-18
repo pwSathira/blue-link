@@ -1,16 +1,14 @@
 package com.polywertz.bluelink.ui;
 
 import com.polywertz.bluelink.controller.UserService;
-import com.polywertz.bluelink.logic.CardController;
-import com.polywertz.bluelink.logic.ItemContainer;
-import com.polywertz.bluelink.logic.ItemPane;
-import com.polywertz.bluelink.logic.RoundedPanel;
+import com.polywertz.bluelink.logic.*;
 import net.miginfocom.swing.MigLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Console;
 
 @Component
 public class ReportUI extends TemplateUI {
@@ -41,8 +39,10 @@ public class ReportUI extends TemplateUI {
         // Add the roundedScrollPanePanel to the mainPanel
         mainPanel.add(roundedScrollPanePanel, "grow, wrap");
         this.reportsContainer = reportsContainer;
+        ConsoleColors.info("ReportUI initialized");
     }
 
     private void updateReportsDisplay(String s) {
+
     }
 }

@@ -35,7 +35,7 @@ public class IndictmentService {
         if(currentProfile != null) {
             // Create a new indictment
         } else {
-            ConsoleColors.error("Blue-Link Error: No profile selected");
+            ConsoleColors.error("No profile selected");
         }
     }
 
