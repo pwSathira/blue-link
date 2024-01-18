@@ -2,14 +2,14 @@ package com.polywertz.bluelink.db;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity // This annotation marks the class as a database entity
 @Table(name = "bl_charges") // This annotation defines the table name
 public class Charges {
-
     @Id // This annotation marks the field as a primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // This defines the primary key generation strategy
     private Long id;
-
     private String category; // For example, "Motor Vehicular Charges"
     private String name; // For example, "Running a Red Light"
     private String description; // A brief description of the charge
@@ -81,4 +81,5 @@ public class Charges {
     public String getCharge() {
         return " "+ this.name + " | " + this.description + " | " + this.timeInMonths + " Months | $" + this.fine;
     }
+
 }

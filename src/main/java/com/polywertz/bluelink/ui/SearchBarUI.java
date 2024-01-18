@@ -1,5 +1,6 @@
 package com.polywertz.bluelink.ui;
 
+import com.polywertz.bluelink.logic.IconRecolor;
 import com.polywertz.bluelink.logic.RoundedPanel;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class SearchBarUI extends JPanel {
         searchFieldListener(searchField);
 
         ImageIcon searchIcon = new ImageIcon("src/main/resources/static/searchbarui/searchicon.png");
-        ImageIcon whiteIcon = changeIconColor(searchIcon, Color.WHITE);
+        ImageIcon whiteIcon = IconRecolor.changeIconColor(searchIcon, Color.WHITE);
         whiteIcon.setImage(whiteIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         JLabel searchIconLabel = new JLabel(whiteIcon);
         searchIconLabel.setForeground(Color.white);
@@ -40,7 +41,6 @@ public class SearchBarUI extends JPanel {
         add(searchPanel);
 
     }
-
     private void searchFieldListener(JTextField searchField) {
         searchField.addMouseListener(new MouseAdapter() {
             @Override
@@ -60,21 +60,5 @@ public class SearchBarUI extends JPanel {
         });
     }
 
-    private ImageIcon changeIconColor(ImageIcon icon, Color newColor) {
-        BufferedImage img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics g = img.createGraphics();
-        icon.paintIcon(null, g, 0, 0);
-        g.dispose();
-
-        for (int i = 0; i < img.getWidth(); i++) {
-            for (int j = 0; j < img.getHeight(); j++) {
-                int px = img.getRGB(i, j);
-                if ((px>>24) != 0x00) { // Check if pixel is not fully transparent
-                    img.setRGB(i, j, newColor.getRGB());
-                }
-            }
-        }
-        return new ImageIcon(img);
-    }
 }
 

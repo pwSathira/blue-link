@@ -2,6 +2,7 @@ package com.polywertz.bluelink.ui;
 
 import com.polywertz.bluelink.controller.ChargesService;
 import com.polywertz.bluelink.db.Charges;
+import com.polywertz.bluelink.db.Profiles;
 import com.polywertz.bluelink.logic.*;
 import jakarta.annotation.PostConstruct;
 import net.miginfocom.swing.MigLayout;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 @Component
 public class ChargesUI extends TemplateUI {
@@ -44,6 +46,7 @@ public class ChargesUI extends TemplateUI {
         // Initialize with all charges
         addChargesToContainer(chargesService.getAllCharges());
     }
+
     private void addChargesToContainer(Iterable<com.polywertz.bluelink.db.Charges> charges) {
         chargesContainer.clearItems(); // Clear existing charges
         for (com.polywertz.bluelink.db.Charges charge : charges) {
