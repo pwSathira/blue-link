@@ -5,22 +5,29 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "bl_indictments")
 public class Indictment {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "profile_id", referencedColumnName = "id")
-    private Profiles profile;
-
-    @ManyToOne
-    @JoinColumn(name = "charge_id", referencedColumnName = "id")
-    private Charges charge;
-
-    @Column(name = "charge_count")
+    @Column(name = "ChargeId")
+    private Long chargeId;
+    @Column(name = "ChargeCount")
     private Integer chargeCount;
+
+    public void setChargeCount(Integer chargeCount) {
+        this.chargeCount = chargeCount;
+    }
+
+    public Integer getChargeCount() {
+        return chargeCount;
+    }
 
     public Indictment() {
         // Default constructor
+    }
+
+    public Indictment(Long currProfileId, Long currChargeId, Integer chargeCount) {
+        this.id = currProfileId;
+        this.chargeId = currChargeId;
+        this.chargeCount = chargeCount;
     }
 }

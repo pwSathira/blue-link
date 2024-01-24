@@ -20,4 +20,10 @@ public class ItemContainer extends RoundedPanel {
         revalidate();
         repaint();
     }
+
+    public void setColor(Color color) {
+        this.setBackground(color);
+
+
+    }
 }

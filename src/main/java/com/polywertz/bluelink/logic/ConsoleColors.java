@@ -83,8 +83,13 @@ public class ConsoleColors {
         System.out.println(RED_BOLD_BRIGHT + message + RESET);
     }
 
-    public static void info(String reportUIInitialized) {
+    public static void info(String message) {
         bluelink();
-        System.out.println(YELLOW + reportUIInitialized + RESET);
+        System.out.println(YELLOW + message + RESET);
+    }
+
+    public static void db(String message) {
+        bluelink();
+        System.out.println(GREEN + message + RESET);
     }
 }

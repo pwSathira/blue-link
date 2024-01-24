@@ -1,6 +1,7 @@
 package com.polywertz.bluelink.controller;
 
 import com.polywertz.bluelink.db.Charges;
+import com.polywertz.bluelink.db.Indictment;
 import com.polywertz.bluelink.db.IndictmentRepository;
 import com.polywertz.bluelink.db.Profiles;
 import com.polywertz.bluelink.logic.ConsoleColors;
@@ -34,18 +35,32 @@ public class IndictmentService {
     private void createIndictment(Charges charge) {
         if(currentProfile != null) {
             // Create a new indictment
+            ConsoleColors.db("Creating new indictment");
+            Indictment indictment = new Indictment(
+                    currentProfile.getId(),
+                    charge.getId(),
+                    1
+            );
+            indictmentRepository.save(indictment);
         } else {
             ConsoleColors.error("No profile selected");
         }
     }
 
-    private void addCountToIndictment(Long id) {
-
+    private void addCountToIndictment(Long chargeId) {
+        ConsoleColors.db("Adding count to indictment");
+        Indictment indictment = indictmentRepository.findByIdAndChargeId(
+                currentProfile.getId(),
+                chargeId
+        );
+        Integer count = indictment.getChargeCount();
+        indictment.setChargeCount(count + 1);
+        indictmentRepository.save(indictment);
     }
 
     private boolean checkIndictmentExists(Charges charge) {
-
-        return false;
+        Long chargeId = charge.getId();
+        return indictmentRepository.existsByIdAndChargeId(currentProfile.getId(),chargeId);
     }
 
 }

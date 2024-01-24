@@ -80,7 +80,7 @@ public class LoginUI extends JPanel {
         User user = userService.findUser("admin");
         userService.setCurrentUser(user);
         ccInstance.addLoginCards();
-        ccInstance.showCard("charges");
+        ccInstance.showCard("profiles");
     }
 
     private void passwordFieldFunctions(JPasswordField passwordField) {
